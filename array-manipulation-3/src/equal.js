@@ -8,5 +8,3 @@ function equal(first, second) {
   }
   return checker;
 }
-
-console.log(equal([1, 2, 3, 4, 5], [1, 2, 3, 3, 5]));
