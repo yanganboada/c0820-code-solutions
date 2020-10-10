@@ -1,8 +1,14 @@
 /* eslint-disable no-unused-vars */
 function flatten(array) {
   const result = [];
-  const check = Array.isArray(array);
-
+  array.forEach(x => {
+    if (Array.isArray(x)) {
+      x.forEach(y => {
+        result.push(y);
+      });
+    } else {
+      result.push(x);
+    }
+  });
+  return result;
 }
-
-console.log(flatten([['foo', 'bar'], ['baz', 'qux']]));

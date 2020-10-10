@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 function difference(first, second) {
-  const bothArray = first.concate(second);
-  console.log(bothArray);
   const result = [];
-  bothArray.forEach((x, index) => {
-    if (bothArray.indexOf(x) === index) {
+  first.forEach(x => {
+    if (second.indexOf(x) === -1) {
+      result.push(x);
+    }
+  });
+  second.forEach(x => {
+    if (first.indexOf(x) === -1) {
       result.push(x);
     }
   });
   return result;
 }
-
-console.log(difference([2, 1], [2, 3]));
