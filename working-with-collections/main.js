@@ -6,6 +6,8 @@ const cardsSuit = ['clubs', 'diamonds', 'hearts', 'spades'];
 const cardsRank = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 const cardsData = [];
 
+createCards(cardsSuit, cardsRank);
+
 function createCards(cardsSuit, cardsRank) {
   cardsSuit.forEach(x => {
     cardsRank.forEach(y => {
@@ -18,7 +20,18 @@ function createCards(cardsSuit, cardsRank) {
       }
     });
   });
-  return cardsData;
+  shuffle(cardsData);
 }
 
-console.log(createCards(cardsSuit, cardsRank));
+function shuffle(cardsData) {
+  let i = cardsData.length;
+  while (i !== 0) {
+    const randomIndex = Math.floor(Math.random() * i);
+    i--;
+    const holdVal = cardsData[i];
+    cardsData[i] = cardsData[randomIndex];
+    cardsData[randomIndex] = holdVal;
+  }
+  console.log(cardsData);
+  return cardsData;
+}
