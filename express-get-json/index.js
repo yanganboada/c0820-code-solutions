@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 
@@ -15,6 +16,11 @@ const student = [
     grade: 95
   }
 ];
+
+const target = path.join(__dirname, 'public');
+const staticMiddleware = express.static(target);
+
+app.use(staticMiddleware);
 
 app.get('/api/grades', (req, res) => {
   res.json(student);
