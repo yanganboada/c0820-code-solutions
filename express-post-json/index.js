@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const grades = [];
+let nextId = 1;
 
 const getJson = app.get('/api/grades', (req, res) => {
   res.json(grades);
@@ -9,10 +10,10 @@ const getJson = app.get('/api/grades', (req, res) => {
 
 const jsonParse = express.json(getJson);
 app.use(jsonParse, (req, res) => {
-  const idNum = grades.length + 1;
-  req.body.id = idNum;
+  req.body.id = nextId;
   grades.push(req.body);
   res.status(201).send(req.body);
+  nextId++;
 });
 
 app.listen(3000, () => {
