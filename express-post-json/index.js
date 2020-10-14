@@ -9,8 +9,10 @@ const getJson = app.get('/api/grades', (req, res) => {
 
 const jsonParse = express.json(getJson);
 app.use(jsonParse, (req, res) => {
+  const idNum = grades.length + 1;
+  req.body.id = idNum;
   grades.push(req.body);
-  res.sendStatus(201);
+  res.status(201).send(req.body);
 });
 
 app.listen(3000, () => {
