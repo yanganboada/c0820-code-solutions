@@ -1,20 +1,25 @@
-$.ajax({
-  method: 'GET',
-  url: 'localhost:3000/api/grades',
-  success: getDataSuccess,
-  error: getDataError
-});
+const tableElt = document.getElementById('table');
+const submitBtn = document.getElementById('submit');
+submitBtn.addEventListener('click', postDataToServer);
 
-function getDataError(err) {
+getDataFromServer();
+
+function getDataFromServer() {
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:3000/api/grades',
+    success: getDataFromServerSuccess,
+    error: getDataFromServerError
+  });
+}
+
+function getDataFromServerError(err) {
   // eslint-disable-next-line no-console
   console.error(err);
 }
 
-function getDataSuccess(res) {
-  // eslint-disable-next-line no-console
-  console.log(res);
-  const data = JSON.parse(res);
-  const tableElt = document.getElementById('table');
+function getDataFromServerSuccess(res) {
+  const data = (res);
   data.map(x => {
     tableElt.append(render(x));
   });
@@ -33,4 +38,41 @@ function render(data) {
   rowElt.append(idElt, nameElt, courseElt, scoreElt);
 
   return rowElt;
+}
+
+function getFormData() {
+  const formData = {};
+  const nameInput = document.getElementById('name').value;
+  const courseInput = document.getElementById('course').value;
+  const gradeInput = document.getElementById('grade').value;
+
+  formData.name = nameInput;
+  formData.course = courseInput;
+  formData.grade = gradeInput;
+
+  return JSON.stringify(formData);
+}
+
+function postDataToServer() {
+  event.preventDefault();
+  $.ajax({
+    method: 'POST',
+    url: 'http://localhost:3000/api/grades',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: getFormData(),
+    success: postDataToServerSuccess,
+    error: postDataToServerError
+  });
+}
+
+function postDataToServerSuccess(res) {
+  tableElt.innerHTML = '';
+  getDataFromServer();
+  document.getElementById('addGrade').reset();
+}
+
+function postDataToServerError(err) {
+  console.error(err);
 }
