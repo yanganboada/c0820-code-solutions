@@ -4,13 +4,10 @@ console.log('Lodash is loaded:', typeof _ !== 'undefined');
 
 setTimeout(() => { console.log('Type "play()" in console for A New Game'); }, 500);
 
-const cardsSuit = ['clubs', 'diamonds', 'hearts', 'spades'];
-const cardsRank = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
-const cardsData = [];
-const player = ['Annie', 'Tim D.', 'Cody', 'Uzair'];
-const cardsPerHand = 2;
-
-function createCards(suit, rank) {
+function createCards() {
+  const cardsSuit = ['clubs', 'diamonds', 'hearts', 'spades'];
+  const cardsRank = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+  const cardsData = [];
   cardsSuit.forEach(x => {
     cardsRank.forEach(y => {
       if (y === 'A') {
@@ -22,14 +19,15 @@ function createCards(suit, rank) {
       }
     });
   });
-  _.shuffle(cardsData);
-  return cardsData;
+  return _.shuffle(cardsData);
 }
 
 function play() {
-  createCards(cardsSuit, cardsRank);
+  const player = ['Annie', 'Tim D.', 'Cody', 'Uzair'];
+  const cardsPerHand = 2;
+  const cardsData = createCards();
   const cardsSplitArray = _.chunk(cardsData, player.length * cardsPerHand);
-  cardsSplitArray.pop(-1);
+  cardsSplitArray.pop();
   let round = 1;
   let increment = 1;
   let interval = 0;
@@ -59,8 +57,8 @@ function play() {
       }
       clearTimeout(roundRonner);
     }, interval * increment);
-    increment++;
     interval = 2500;
+    increment++;
   });
   setTimeout(() => { console.log('--||| GAME OVER! |||--'); }, 16000);
   setTimeout(() => { console.log('Type "play()" in console for A New Game'); }, 18500);
