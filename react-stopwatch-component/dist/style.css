@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  width: 250px;
+  height: 400px;
+  margin: 10% auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.watch {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+i {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 3rem;
+}
