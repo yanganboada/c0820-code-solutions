@@ -1,0 +1,55 @@
+body {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  width: 250px;
+  background-color: skyblue;
+  padding: 1.5rem 3rem;
+  margin: 10% auto;
+  border: 3px solid black;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  box-shadow: lightgray 5px 5px 3px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: translate(3px, 3px);
+}
+
+.dkpurple {
+  color: white;
+  background-color: #351c75;
+}
+
+.purple {
+  color: white;
+  background-color: #674ea7;
+}
+
+.coral {
+  color: white;
+  background-color: #e06666;
+}
+
+.blush {
+  color: #000;
+  background-color: #f6b26b;
+}
+
+.yellow {
+  color: #000;
+  background-color: #ff0;
+}
+
+.white {
+  color: #000;
+  background-color: #fff;
+}
