@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+.email-signup {
+  width: 350px;
+  margin: 5% auto;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: larger;
+}
