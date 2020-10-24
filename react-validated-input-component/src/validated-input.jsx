@@ -11,10 +11,16 @@ class ValidatedInput extends React.Component {
   }
 
   handleChange(e) {
+    const currentVal = e.target.value;
     this.setState({
-      val: e.target.value
+      val: currentVal
     });
-    if (e.target.value.length >= 8) {
+    if (
+      currentVal.length >= 8 &&
+      currentVal.match(/\d+/g) &&
+      currentVal.match(/.*[A-Z]/g) &&
+      currentVal.match(/[!@#$%^&*()]/g)
+    ) {
       this.setState({ isPassed: true });
     } else {
       this.setState({ isPassed: false });
@@ -35,6 +41,15 @@ class ValidatedInput extends React.Component {
     }
     if (currentVal.length < 8) {
       return <p className='error red'>Your password is too short.</p>;
+    }
+    if (!currentVal.match(/\d+/g)) {
+      return <p className='error red'>You must include at leaset 1 number</p>;
+    }
+    if (!currentVal.match(/.*[A-Z]/g)) {
+      return <p className='error red'>You must include at leaset 1 capital letter</p>;
+    }
+    if (!currentVal.match(/[!@#$%^&*()]/g)) {
+      return <p className='error red'>You must include at leaset 1 symbol eg.@#$</p>;
     }
   }
 
