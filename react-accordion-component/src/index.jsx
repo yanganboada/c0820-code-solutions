@@ -21,6 +21,6 @@ const subjects = [
 ];
 
 ReactDOM.render(
-  <Accordion />,
+  <Accordion list={subjects} />,
   document.getElementById('root')
 );
