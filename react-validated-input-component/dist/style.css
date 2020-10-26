@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+p {
+  margin-left: 5%;
+}
+
+.row {
+  width: 350px;
+  margin: 5% auto;
+}
+
+.input {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: larger;
+}
+
+.error {
+  align-self: start;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: limegreen;
+}
