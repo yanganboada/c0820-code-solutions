@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: 'Nunito', sans-serif;
+}
+
+i {
+  margin: 2rem;
+  cursor: pointer;
+}
+
+.menu {
+  width: 20%;
+  min-width: 200px;
+  height: 100vh;
+  background-color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+  animation: menushow 0.4s ease-in-out;
+  box-shadow: lightgray 2px 0 5px;
+}
+
+@keyframes menushow {
+  from { left: -20%; }
+  to { left: 0; }
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 0.5rem;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+}
