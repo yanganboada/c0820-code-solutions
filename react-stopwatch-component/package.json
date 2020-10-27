@@ -1,7 +1,6 @@
 {
   "name": "react-stopwatch-component",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --watch --mode=development --devtool=source-map",
@@ -20,5 +19,6 @@
     "babel-loader": "^8.1.0",
     "webpack": "^5.2.0",
     "webpack-cli": "^4.1.0"
-  }
+  },
+  "description": ""
 }
