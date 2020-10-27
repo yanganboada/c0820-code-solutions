@@ -5,34 +5,25 @@ class Accordion extends React.Component {
     super(props);
     this.props = props;
     this.state = {
-      target: null,
-      isTargetOn: false
+      index: null
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    !this.state.target
-      ? this.setState({ target: e.target.textContent, isTargetOn: !this.state.isTargetOn })
-      : this.setState(() => {
-        if (this.state.target !== e.target.textContent) {
-          return { target: e.target.textContent };
-        } else {
-          return { target: null, isTargetOn: !this.state.isTargetOn };
-        }
-
-      });
+  handleClick(index) {
+    this.state.index !== index
+      ? this.setState({ index: index })
+      : this.setState({ index: null });
   }
 
   render() {
-    // if (this.state.isTitleClicked) {
     return (
       <div>
         {this.props.list.map((item, index) => (
           <div className="box" key={index} >
-            <h3 className="title" onClick={this.handleClick}>{item.subject}</h3>
+            <h3 className="title" onClick={() => this.handleClick(index)}>{item.subject}</h3>
             {
-              this.state.target === item.subject
+              this.state.index === index
                 ? <p className="description">{item.description}</p>
                 : <p className="description hide">{item.description}</p>
             }
