@@ -87,7 +87,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(res => this.setState(state => {
         const currentTodo = [...this.state.todos];
-        currentTodo[indexByTodoId].isCompleted = isCompletedByTodoId;
+        currentTodo[indexByTodoId] = res;
         return { todos: currentTodo };
       }))
       .catch(err => console.log(err.message));
