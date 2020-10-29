@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import PageTitle from './page-title';
 import TodoList from './todo-list';
@@ -25,7 +26,8 @@ class App extends React.Component {
      */
     fetch('/api/todos')
       .then(res => res.json())
-      .then(res => this.setState({ todos: res }));
+      .then(res => this.setState({ todos: res }))
+      .catch(err => console.error(err.message));
   }
 
   addTodo(newTodo) {
@@ -37,18 +39,20 @@ class App extends React.Component {
      * TIP: Be sure to SERIALIZE the todo in the body with JSON.stringify()
      * And specify the "Content-Type" header as "application/json"
      */
-    fetch('/api/totdos', {
+    fetch('/api/todos', {
       method: 'POST',
-      'Content-Type': 'application/json',
-      body: {
-        task: JSON.stringify(newTodo),
-        isCompleted: false
-      }
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newTodo)
     })
       .then(res => res.json())
-      .then(res => this.setState(this.setState({
-        todos: this.state.todos.push(res)
-      })));
+      .then(res => this.setState(state => {
+        const currentTodo = [...this.state.todos];
+        currentTodo[currentTodo.length] = res;
+        return { todos: currentTodo };
+      }))
+      .catch(err => console.error(err.message));
   }
 
   toggleCompleted(todoId) {
@@ -63,6 +67,30 @@ class App extends React.Component {
      * TIP: Be sure to SERIALIZE the updates in the body with JSON.stringify()
      * And specify the "Content-Type" header as "application/json"
      */
+    let isCompletedByTodoId = null;
+    let indexByTodoId = null;
+
+    this.state.todos.forEach(todo => {
+      if (todo.id === todoId) {
+        isCompletedByTodoId = !todo.isCompleted;
+        indexByTodoId = this.state.todos.indexOf(todo);
+      }
+    });
+
+    fetch(`/api/todos/${todoId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ isCompleted: isCompletedByTodoId })
+    })
+      .then(res => res.json())
+      .then(res => this.setState(state => {
+        const currentTodo = [...this.state.todos];
+        currentTodo[indexByTodoId].isCompleted = isCompletedByTodoId;
+        return { todos: currentTodo };
+      }))
+      .catch(err => console.log(err.message));
   }
 
   render() {

@@ -14,6 +14,16 @@
       "id": 7,
       "task": "Get a job.",
       "isCompleted": false
+    },
+    {
+      "task": "Sleep",
+      "isCompleted": false,
+      "id": 8
+    },
+    {
+      "task": "work",
+      "isCompleted": false,
+      "id": 9
     }
   ]
 }
