@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import UserList from './user-list';
 
@@ -6,21 +7,28 @@ class App extends React.Component {
     super(props);
     this.state = {
       users: [],
-      isLoading: true
+      isLoading: true,
+      error: null
     };
   }
 
   componentDidMount() {
     /* your code here */
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('fetch failed with status ' + res.status);
+      })
+      // .then(res => res.json())
       .then(data => this.setState({ users: data, isLoading: false }))
-      .catch(err => console.error(err.message));
+      .catch(err => this.setState({ error: err.message }));
   }
 
   render() {
     return this.state.isLoading
-      ? <p>Loading...</p>
+      ? this.state.error
+        ? <p>{this.state.error}</p>
+        : <p>Loading...</p>
       : <UserList users={this.state.users}/>;
   }
 }
